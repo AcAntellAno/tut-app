@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
     const [blogs, setBlogs] = useState([
@@ -7,14 +8,25 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'Luigi', id: 3 }
     ]);
 
+    const [name, setName] = useState('mario');
+
+    const handleDelete = (id) => {
+        const newBlogs = blogs.filter((blog) => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
+    useEffect(() => (
+        //  runs when data changes
+        //  could fetch data, communicate with auth services, etc
+        console.log('use effect ran'),
+        console.log(name)
+    ), [name]);
+
     return ( 
         <div className="home">
-            {blogs.map((blog) => (
-                <div className="blog=preview" key={blog.id}>
-                    <h2>{ blog.title }</h2>
-                    <p> Written By: { blog.author }</p>
-                </div>
-            ))}
+          <button onClick={() => setName('luigi')}>Change Name</button>
+          <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>
+          <p>{name}</p>
         </div>
      );
 }

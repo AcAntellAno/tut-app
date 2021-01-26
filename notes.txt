@@ -5,3 +5,5 @@ State -> the data used in a component in that point in time
 
 useState => this is a hook. Hook is a special type of func that does a certain job.
 The useState hook gives us a way to use a reactive value and change it when we want.
+
+props => way to pass data in parent component to child component
